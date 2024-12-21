@@ -35,6 +35,7 @@ To set up the project locally, follow these steps:
 ```
 git clone https://github.com/Medamine-Bahassou/LABs-JEE.git
 cd pLAB4
+```
 
 ## Install dependencies:
 
@@ -42,14 +43,14 @@ cd pLAB4
 ```
 cd backend
 mvn install
- 
+ ```
 
 ### For the frontend (Angular):
 
 ```
 cd frontend
 npm install
- 
+ ```
 
 ## Run the application:
 
@@ -58,14 +59,14 @@ npm install
 ```
 cd backend
 mvn spring-boot:run
- 
+ ```
 
 ### Start the frontend application:
 
 ```
 cd frontend
 ng serve
- 
+ ```
 
 ### Access the application:
 Open your web browser and navigate to http://localhost:4200 to view the application.
@@ -91,6 +92,8 @@ The project is organized as follows:
 │
 └── README.md               # Project documentation
  
+```
+
 
 # Contributing
 Contributions are welcome! If you would like to contribute to this project, please follow these steps:

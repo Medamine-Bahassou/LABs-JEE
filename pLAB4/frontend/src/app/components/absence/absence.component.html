@@ -1,0 +1,120 @@
+
+<div class="container mx-auto w-full px-4 py-8 bg-white rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold mb-6">
+    {{ isEditing ? 'Edit Absence' : 'Create New Absence' }}
+  </h2>
+
+  <form [formGroup]="absenceForm" (ngSubmit)="onSubmit()" class="  mb-12 space-y-6">
+    <div class="space-y-2">
+      <label for="date" class="block text-sm font-medium text-gray-700">Date:</label>
+      <input
+        type="date"
+        id="date"
+        formControlName="date"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+
+    <div class="space-y-2">
+      <label for="reason" class="block text-sm font-medium text-gray-700">Reason:</label>
+      <textarea
+        id="reason"
+        formControlName="reason"
+        rows="3"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <input
+        type="checkbox"
+        id="justified"
+        formControlName="justified"
+        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+      <label for="justified" class="text-sm font-medium text-gray-700">Justified</label>
+    </div>
+
+    <div class="space-y-2">
+      <label for="student" class="block text-sm font-medium text-gray-700">Student:</label>
+      <select
+        id="student"
+        formControlName="student"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="" disabled>Select a student</option>
+        <option *ngFor="let student of students" [value]="student.id">
+          {{ student.firstName }} {{ student.lastName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="flex space-x-4">
+      <button
+        type="submit"
+        [disabled]="!absenceForm.valid"
+        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed">
+        {{ isEditing ? 'Update' : 'Create' }}
+      </button>
+      <button
+        type="button"
+        (click)="resetForm()"
+        class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <div class="space-y-4">
+    <h3 class="text-xl font-bold">Absences List</h3>
+
+    <div class="overflow-x-auto shadow ring-1 ring-black ring-opacity-5 rounded-lg">
+      <table class="min-w-full divide-y divide-gray-300">
+        <thead class="bg-gray-50">
+        <tr>
+          <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Date</th>
+          <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Reason</th>
+          <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Justified</th>
+          <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Student</th>
+          <th class="py-3.5 px-4 text-left text-sm font-semibold text-gray-900">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 bg-white">
+        <tr *ngFor="let absence of absences" >
+          <td class="whitespace-nowrap py-4 px-4 text-sm text-gray-900">
+            {{ absence.date | date }}
+          </td>
+          <td class="py-4 px-4 text-sm text-gray-900">
+            {{ absence.reason }}
+          </td>
+          <td class="whitespace-nowrap py-4 px-4 text-sm">
+              <span
+                [class]="absence.justified ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100'"
+                class="px-2 py-1 rounded-full text-xs font-medium">
+                {{ absence.justified ? 'Yes' : 'No' }}
+              </span>
+          </td>
+          <td class="whitespace-nowrap py-4 px-4 text-sm text-gray-900">
+            {{ absence.student?.firstName }} {{ absence.student?.lastName }}
+          </td>
+          <td class="whitespace-nowrap py-4 px-4 text-sm text-gray-900">
+            <div class="flex space-x-2">
+              <button
+                (click)="editAbsence(absence)"
+                class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Edit
+              </button>
+              <button
+                (click)="deleteAbsence(absence.id!)"
+                class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="absences.length === 0">
+          <td colspan="5" class="py-4 px-4 text-sm text-gray-500 text-center">
+            No absences found
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

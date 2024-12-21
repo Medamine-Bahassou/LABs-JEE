@@ -32,37 +32,40 @@ pLAB4 is a Java-based project that utilizes various technologies including Sprin
 To set up the project locally, follow these steps:
 
 ## Clone the repository:
-``
+```
 git clone https://github.com/Medamine-Bahassou/LABs-JEE.git
 cd pLAB4
-``
+
 ## Install dependencies:
 
 ### For the backend (Spring Boot):
-``
+```
 cd backend
 mvn install
-``
+ 
 
 ### For the frontend (Angular):
-``
+
+```
 cd frontend
 npm install
-``
+ 
 
 ## Run the application:
 
 ### Start the backend server:
-``
+
+```
 cd backend
 mvn spring-boot:run
-``
+ 
 
 ### Start the frontend application:
-``
+
+```
 cd frontend
 ng serve
-``
+ 
 
 ### Access the application:
 Open your web browser and navigate to http://localhost:4200 to view the application.
@@ -73,7 +76,7 @@ The application provides a user-friendly interface for interacting with the back
 # Project Structure
 The project is organized as follows:
 
-``
+```
 /pLAB4
 │
 ├── /backend                # Spring Boot backend
@@ -87,7 +90,7 @@ The project is organized as follows:
 │   └── ...
 │
 └── README.md               # Project documentation
-``
+ 
 
 # Contributing
 Contributions are welcome! If you would like to contribute to this project, please follow these steps:
